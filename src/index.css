@@ -29,8 +29,32 @@ body {
   overflow: hidden;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.25);
   position: relative;
-  display: flex;
-  flex-direction: column;
+}
+
+/* Screen transitions */
+.screen-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.slide-in-right {
+  animation: slideInFromRight 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-in-left {
+  animation: slideInFromLeft 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); opacity: 0.85; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100%); opacity: 0.85; }
+  to   { transform: translateX(0);     opacity: 1; }
 }
 
 /* Arrival screen animations */
