@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import SplashScreen from './screens/SplashScreen'
-import CampusScreen from './screens/CampusScreen'
 import SearchScreen from './screens/SearchScreen'
 import RoutePreviewScreen from './screens/RoutePreviewScreen'
 import NavigationScreen from './screens/NavigationScreen'
 import ArrivalScreen from './screens/ArrivalScreen'
 
-const SCREEN_ORDER = ['splash', 'campus', 'search', 'preview', 'navigation', 'arrival']
+const SCREEN_ORDER = ['splash', 'search', 'preview', 'navigation', 'arrival']
 
 export default function App() {
   const [screen, setScreen] = useState('splash')
@@ -16,7 +15,7 @@ export default function App() {
   // Auto-advance from splash after 2.2 seconds
   useEffect(() => {
     if (screen === 'splash') {
-      const t = setTimeout(() => goTo('campus'), 2200)
+      const t = setTimeout(() => goTo('search'), 2200)
       return () => clearTimeout(t)
     }
   }, [screen])
@@ -42,8 +41,6 @@ export default function App() {
     switch (screen) {
       case 'splash':
         return <SplashScreen />
-      case 'campus':
-        return <CampusScreen onEnterBuilding={() => goTo('search')} />
       case 'search':
         return <SearchScreen onSelect={handleSelect} />
       case 'preview':
@@ -65,7 +62,7 @@ export default function App() {
         return (
           <ArrivalScreen
             location={selectedLocation}
-            onDone={() => goTo('campus')}
+            onDone={() => goTo('search')}
           />
         )
       default:
