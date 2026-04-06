@@ -9,15 +9,30 @@ const BackIcon = () => (
 )
 
 const WalkIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="4" r="1.5" fill="#6B7280" stroke="none" />
-    <path d="M8 8l4 2 2 5" />
-    <path d="M12 10l2 3-3 4" />
-    <path d="M9 20l2-4" />
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M13 4a1 1 0 100-2 1 1 0 000 2z" fill="#6B7280" stroke="none"/>
+    <path d="M7 20l2.5-5L13 17l2-5"/>
+    <path d="M10.5 11.5L12 8l4 2"/>
   </svg>
 )
 
-// ─── Helix Floor Plan SVG ─────────────────────────────────────────────────────
+// ─── Helix Floor Plan — Cross-Corridor Layout ─────────────────────────────────
+//
+//  ViewBox 0 0 390 440
+//
+//  ┌────────────┬──────┬────────────┐
+//  │ Mahony     │  ↑   │   Helix    │  y=20–180
+//  │   Hall     │  │   │   Theatre  │
+//  ├────────────┤  │   ├────────────┤
+//  │◄═══════════╪══╪═══╪═══════════►│  y=185–245 (horizontal corridor)
+//  ├────────────┤  │   ├────────────┤
+//  │ Box        │  │   │   Café     │  y=252–352
+//  │  Office    │  │   │   Bar      │
+//  └────────────┴──┼───┴────────────┘
+//                  │  (main vertical corridor)
+//              ┌───┴───┐
+//              │ENTRANCE│  y=383–427
+//              └────────┘
 
 function HelixFloorPlan({ route, locationName }) {
   const waypoints = route?.waypoints ?? []
@@ -34,49 +49,62 @@ function HelixFloorPlan({ route, locationName }) {
       style={{ display: 'block' }}
     >
       {/* ── Building shell ── */}
-      <rect x="0" y="0" width="390" height="440" fill="#E4E7EB" />
+      <rect x="0" y="0" width="390" height="440" fill="#D6D9DE" />
 
-      {/* ── Mahony Hall (top left) ── */}
-      <rect x="12" y="12" width="190" height="200" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-      <text x="107" y="98" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Mahony</text>
-      <text x="107" y="116" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Hall</text>
-      <text x="107" y="136" textAnchor="middle" fontSize="10" fill="#9CA3AF" fontFamily="Inter,sans-serif">1,300 capacity</text>
+      {/* ── Main vertical corridor (entrance spine) ── */}
+      <rect x="165" y="20" width="60" height="360" fill="#ECEEF1" />
 
-      {/* ── Helix Theatre (top right) ── */}
-      <rect x="210" y="12" width="168" height="200" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-      <text x="294" y="98" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Helix</text>
-      <text x="294" y="116" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Theatre</text>
-      <text x="294" y="136" textAnchor="middle" fontSize="10" fill="#9CA3AF" fontFamily="Inter,sans-serif">433 seats</text>
+      {/* ── Horizontal east–west corridor ── */}
+      <rect x="20" y="185" width="350" height="60" fill="#ECEEF1" />
 
-      {/* ── Main east–west corridor ── */}
-      <rect x="0" y="220" width="390" height="52" fill="#F0F2F5" />
+      {/* ── TOP-LEFT: Mahony Hall ── */}
+      <rect x="20" y="20" width="138" height="160" rx="4" fill="#FFFFFF" stroke="#BFC4CB" strokeWidth="1.5" />
+      {/* Door gap (bottom wall opening into corridor) */}
+      <rect x="78" y="178" width="22" height="9" fill="#ECEEF1" />
+      <text x="89" y="88" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Mahony</text>
+      <text x="89" y="106" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Hall</text>
+      <text x="89" y="126" textAnchor="middle" fontSize="10" fill="#9CA3AF" fontFamily="Inter,sans-serif">1,300 capacity</text>
 
-      {/* ── Helix Staircase (iconic feature, centre of corridor) ── */}
-      <circle cx="195" cy="246" r="22" fill="#EFF6FF" stroke="#93C5FD" strokeWidth="2" />
-      <text x="195" y="242" textAnchor="middle" fontSize="8" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">HELIX</text>
-      <text x="195" y="254" textAnchor="middle" fontSize="8" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">STAIR</text>
+      {/* ── TOP-RIGHT: Helix Theatre ── */}
+      <rect x="232" y="20" width="138" height="160" rx="4" fill="#FFFFFF" stroke="#BFC4CB" strokeWidth="1.5" />
+      {/* Door gap */}
+      <rect x="290" y="178" width="22" height="9" fill="#ECEEF1" />
+      <text x="301" y="88" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Helix</text>
+      <text x="301" y="106" textAnchor="middle" fontSize="13" fontWeight="700" fill="#1F2937" fontFamily="Inter,sans-serif">Theatre</text>
+      <text x="301" y="126" textAnchor="middle" fontSize="10" fill="#9CA3AF" fontFamily="Inter,sans-serif">433 seats</text>
 
-      {/* ── Box Office (bottom left) ── */}
-      <rect x="12" y="280" width="88" height="100" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-      <text x="56" y="326" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Box</text>
-      <text x="56" y="341" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Office</text>
+      {/* ── BOTTOM-LEFT: Box Office ── */}
+      <rect x="20" y="252" width="138" height="100" rx="4" fill="#FFFFFF" stroke="#BFC4CB" strokeWidth="1.5" />
+      {/* Door gap (top wall) */}
+      <rect x="78" y="245" width="22" height="9" fill="#ECEEF1" />
+      <text x="89" y="302" textAnchor="middle" fontSize="12" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Box Office</text>
 
-      {/* ── Main Foyer (centre) ── */}
-      <rect x="106" y="280" width="178" height="100" rx="5" fill="#F8F9FA" stroke="#E5E7EB" strokeWidth="1" />
-      <text x="195" y="336" textAnchor="middle" fontSize="11" fontWeight="500" fill="#9CA3AF" fontFamily="Inter,sans-serif">Main Foyer</text>
+      {/* ── BOTTOM-RIGHT: Café Bar ── */}
+      <rect x="232" y="252" width="138" height="100" rx="4" fill="#FFFFFF" stroke="#BFC4CB" strokeWidth="1.5" />
+      {/* Door gap (top wall) */}
+      <rect x="290" y="245" width="22" height="9" fill="#ECEEF1" />
+      <text x="301" y="302" textAnchor="middle" fontSize="12" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Café Bar</text>
 
-      {/* ── Café Bar (bottom right) ── */}
-      <rect x="290" y="280" width="88" height="100" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.5" />
-      <text x="334" y="326" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Café</text>
-      <text x="334" y="341" textAnchor="middle" fontSize="11" fontWeight="600" fill="#374151" fontFamily="Inter,sans-serif">Bar</text>
+      {/* ── Helix Staircase (landmark at corridor intersection) ── */}
+      <circle cx="195" cy="215" r="24" fill="#EAF0FF" stroke="#93C5FD" strokeWidth="2" />
+      {/* Staircase icon lines */}
+      <line x1="188" y1="222" x2="202" y2="222" stroke="#2563EB" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="185" y1="216" x2="199" y2="216" stroke="#2563EB" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="188" y1="210" x2="202" y2="210" stroke="#2563EB" strokeWidth="1.5" strokeLinecap="round"/>
+      <text x="195" y="234" textAnchor="middle" fontSize="7" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">STAIR</text>
 
       {/* ── Entrance vestibule ── */}
-      <rect x="148" y="386" width="94" height="42" rx="5" fill="#EFF6FF" stroke="#93C5FD" strokeWidth="1.5" />
-      <text x="195" y="412" textAnchor="middle" fontSize="10" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">ENTRANCE</text>
+      <rect x="148" y="383" width="94" height="44" rx="4" fill="#EFF6FF" stroke="#93C5FD" strokeWidth="1.5" />
+      <text x="195" y="410" textAnchor="middle" fontSize="10" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">ENTRANCE</text>
 
-      {/* ── Floor label badge ── */}
-      <rect x="12" y="392" width="88" height="26" rx="6" fill="#1F2937" />
-      <text x="56" y="410" textAnchor="middle" fontSize="11" fontWeight="600" fill="#FFFFFF" fontFamily="Inter,sans-serif">Ground Floor</text>
+      {/* ── Floor badge ── */}
+      <rect x="12" y="392" width="124" height="26" rx="6" fill="#1F2937" />
+      <text x="74" y="410" textAnchor="middle" fontSize="11" fontWeight="600" fill="#FFFFFF" fontFamily="Inter,sans-serif">Ground Floor</text>
+
+      {/* ── Compass indicator ── */}
+      <circle cx="368" cy="28" r="16" fill="white" opacity="0.9" />
+      <text x="368" y="23" textAnchor="middle" fontSize="8" fontWeight="700" fill="#2563EB" fontFamily="Inter,sans-serif">N</text>
+      <line x1="368" y1="25" x2="368" y2="36" stroke="#9CA3AF" strokeWidth="1.5" strokeLinecap="round"/>
 
       {/* ── Route line ── */}
       {routePath && (
@@ -84,31 +112,31 @@ function HelixFloorPlan({ route, locationName }) {
           points={routePath}
           fill="none"
           stroke="#2563EB"
-          strokeWidth="4.5"
+          strokeWidth="5"
           strokeLinecap="round"
           strokeLinejoin="round"
-          opacity="0.9"
+          opacity="0.95"
         />
       )}
 
-      {/* ── Start marker (YOU ARE HERE) ── */}
+      {/* ── Start marker ── */}
       {start && (
         <>
-          <circle cx={start.x} cy={start.y} r="10" fill="#10B981" />
-          <circle cx={start.x} cy={start.y} r="4" fill="white" />
-          <text x={start.x} y={start.y + 20} textAnchor="middle" fontSize="8" fontWeight="700" fill="#10B981" fontFamily="Inter,sans-serif">YOU ARE HERE</text>
+          <circle cx={start.x} cy={start.y} r="11" fill="#10B981" />
+          <circle cx={start.x} cy={start.y} r="5" fill="white" />
         </>
       )}
 
-      {/* ── Destination pin ── */}
-      {end && (
+      {/* ── Destination pin + callout ── */}
+      {end && end !== start && (
         <>
           {/* Callout label */}
-          <rect x={end.x - 52} y={end.y - 42} width="104" height="26" rx="6" fill="#2563EB" />
-          <text x={end.x} y={end.y - 24} textAnchor="middle" fontSize="10" fontWeight="700" fill="white" fontFamily="Inter,sans-serif">{locationName}</text>
-          {/* Pin circle */}
-          <circle cx={end.x} cy={end.y} r="12" fill="#2563EB" />
-          <circle cx={end.x} cy={end.y} r="5" fill="white" />
+          <rect x={end.x - 54} y={end.y - 46} width="108" height="26" rx="6" fill="#2563EB" />
+          <polygon points={`${end.x - 6},${end.y - 20} ${end.x + 6},${end.y - 20} ${end.x},${end.y - 12}`} fill="#2563EB" />
+          <text x={end.x} y={end.y - 28} textAnchor="middle" fontSize="10" fontWeight="700" fill="white" fontFamily="Inter,sans-serif">{locationName}</text>
+          {/* Pin */}
+          <circle cx={end.x} cy={end.y} r="10" fill="#2563EB" stroke="white" strokeWidth="2" />
+          <circle cx={end.x} cy={end.y} r="4" fill="white" />
         </>
       )}
     </svg>
@@ -139,10 +167,11 @@ export default function RoutePreviewScreen({ location, onStart, onBack }) {
       {/* Bottom Sheet */}
       <div style={styles.bottomSheet}>
         <div style={styles.handle} />
-
         <div style={styles.routeRow}>
           <div>
-            <div style={styles.walkTime}>{route.totalTime} <span style={styles.minLabel}>min</span></div>
+            <div style={styles.walkTime}>
+              {route.totalTime}<span style={styles.minLabel}> min</span>
+            </div>
             <div style={styles.routeMeta}>
               <WalkIcon />
               <span style={styles.routeMetaText}>{route.totalDistance} · {route.floor}</span>
@@ -150,10 +179,9 @@ export default function RoutePreviewScreen({ location, onStart, onBack }) {
           </div>
           <div style={styles.routeTag}>
             <span style={styles.routeTagTitle}>FASTEST ROUTE</span>
-            <span style={styles.routeTagSub}>{location?.route ?? route.startLabel}</span>
+            <span style={styles.routeTagSub}>{location?.route ?? 'via Main Corridor'}</span>
           </div>
         </div>
-
         <button style={styles.startBtn} onClick={onStart}>
           Start Navigation
         </button>
@@ -201,8 +229,7 @@ const styles = {
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    background: '#E4E7EB',
+    background: '#D6D9DE',
   },
   bottomSheet: {
     background: '#ffffff',
@@ -263,7 +290,7 @@ const styles = {
     fontSize: 12,
     color: '#6B7280',
     textAlign: 'right',
-    maxWidth: 120,
+    maxWidth: 130,
   },
   startBtn: {
     width: '100%',
