@@ -77,7 +77,7 @@ export default function SearchScreen({ onSelect }) {
         loc.name.toLowerCase().includes(query.toLowerCase()) ||
         loc.subtitle.toLowerCase().includes(query.toLowerCase())
       )
-    : suggestedLocations
+    : null
 
   const listLabel = query.trim().length > 0 ? 'Results' : 'Recent & Suggested'
 
@@ -110,10 +110,10 @@ export default function SearchScreen({ onSelect }) {
       <div style={styles.listSection}>
         <span style={styles.listLabel}>{listLabel}</span>
         <div style={styles.list}>
-          {filtered.length === 0 && (
+          {filtered !== null && filtered.length === 0 && (
             <p style={styles.noResults}>No results found</p>
           )}
-          {filtered.map(loc => (
+          {(filtered ?? suggestedLocations).map(loc => (
             <button
               key={loc.id}
               style={styles.listItem}
@@ -130,6 +130,31 @@ export default function SearchScreen({ onSelect }) {
             </button>
           ))}
         </div>
+
+        {/* All locations when not searching */}
+        {filtered === null && (
+          <>
+            <span style={{ ...styles.listLabel, display: 'block', marginTop: 28 }}>All Locations</span>
+            <div style={styles.list}>
+              {locations.map(loc => (
+                <button
+                  key={loc.id}
+                  style={styles.listItem}
+                  onClick={() => onSelect(loc)}
+                >
+                  <div style={{ ...styles.iconBox, background: categoryBg[loc.category] }}>
+                    {categoryIcons[loc.category]}
+                  </div>
+                  <div style={styles.listItemText}>
+                    <span style={styles.itemName}>{loc.name}</span>
+                    <span style={styles.itemSubtitle}>{loc.subtitle}</span>
+                  </div>
+                  <ChevronRight />
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
