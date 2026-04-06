@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { locations, suggestedLocations } from '../data/locations'
+import { locations, suggestedLocations, accessibilityLocations } from '../data/locations'
 
 const categoryIcons = {
   venue: (
@@ -38,6 +38,17 @@ const categoryIcons = {
       <line x1="12" y1="16" x2="12.01" y2="16" />
     </svg>
   ),
+  accessibility: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0891B2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 8v4l3 3" />
+    </svg>
+  ),
+  wellbeing: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DB2777" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+    </svg>
+  ),
 }
 
 const categoryBg = {
@@ -46,6 +57,8 @@ const categoryBg = {
   study: '#F5F3FF',
   social: '#ECFDF5',
   service: '#F9FAFB',
+  accessibility: '#ECFEFF',
+  wellbeing: '#FDF2F8',
 }
 
 const ChevronRight = () => (
@@ -72,10 +85,13 @@ const MenuIcon = () => (
 export default function SearchScreen({ onSelect }) {
   const [query, setQuery] = useState('')
 
+  const allLocations = [...locations, ...accessibilityLocations]
+
   const filtered = query.trim().length > 0
-    ? locations.filter(loc =>
+    ? allLocations.filter(loc =>
         loc.name.toLowerCase().includes(query.toLowerCase()) ||
-        loc.subtitle.toLowerCase().includes(query.toLowerCase())
+        loc.subtitle.toLowerCase().includes(query.toLowerCase()) ||
+        (loc.tag && loc.tag.toLowerCase().includes(query.toLowerCase()))
       )
     : null
 
@@ -130,6 +146,34 @@ export default function SearchScreen({ onSelect }) {
             </button>
           ))}
         </div>
+
+        {/* Accessibility & Wellbeing — always shown when not searching */}
+        {filtered === null && (
+          <>
+            <span style={{ ...styles.listLabel, display: 'block', marginTop: 28 }}>Accessibility & Wellbeing</span>
+            <div style={styles.list}>
+              {accessibilityLocations.map(loc => (
+                <button
+                  key={loc.id}
+                  style={styles.listItem}
+                  onClick={() => onSelect(loc)}
+                >
+                  <div style={{ ...styles.iconBox, background: categoryBg[loc.category] }}>
+                    {categoryIcons[loc.category]}
+                  </div>
+                  <div style={styles.listItemText}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span style={styles.itemName}>{loc.name}</span>
+                      {loc.tag && <span style={styles.tag}>{loc.tag}</span>}
+                    </div>
+                    <span style={styles.itemSubtitle}>{loc.subtitle}</span>
+                  </div>
+                  <ChevronRight />
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         {/* All locations when not searching */}
         {filtered === null && (
@@ -274,5 +318,14 @@ const styles = {
     color: '#9CA3AF',
     textAlign: 'center',
     marginTop: 32,
+  },
+  tag: {
+    fontSize: 11,
+    fontWeight: 600,
+    color: '#0891B2',
+    background: '#ECFEFF',
+    borderRadius: 6,
+    padding: '2px 6px',
+    letterSpacing: '0.2px',
   },
 }

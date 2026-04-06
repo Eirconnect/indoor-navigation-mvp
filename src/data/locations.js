@@ -89,6 +89,76 @@ export const locations = [
   },
 ]
 
+// Accessibility & Wellbeing locations
+// Sources: accessable.co.uk/dublin-city-university, dcu.ie/library/floor-plan-oreilly-library
+export const accessibilityLocations = [
+  {
+    id: 'sensory-pod',
+    name: 'Sensory Pod',
+    subtitle: "Level 1 · O'Reilly Library (Building Y)",
+    building: 'library',
+    floor: '1',
+    code: 'Y101',
+    category: 'accessibility',
+    walkTime: 7,
+    distance: '350m',
+    route: "via The Mall · O'Reilly Library",
+    tag: 'Quiet Space',
+  },
+  {
+    id: 'quiet-room',
+    name: 'Quiet Room',
+    subtitle: 'Ground Floor · Interfaith Centre',
+    building: 'interfaith',
+    floor: 'G',
+    code: 'IFG01',
+    category: 'wellbeing',
+    walkTime: 6,
+    distance: '300m',
+    route: 'via The Mall West',
+    tag: 'Wellbeing',
+  },
+  {
+    id: 'prayer-room',
+    name: 'Prayer Room',
+    subtitle: 'Ground Floor · Interfaith Centre',
+    building: 'interfaith',
+    floor: 'G',
+    code: 'IFG02',
+    category: 'wellbeing',
+    walkTime: 6,
+    distance: '300m',
+    route: 'via The Mall West',
+    tag: 'Wellbeing',
+  },
+  {
+    id: 'accessible-entrance-helix',
+    name: 'Accessible Entrance',
+    subtitle: 'Ground Floor · The Helix (Building Z)',
+    building: 'helix',
+    floor: 'G',
+    code: 'ZG05',
+    category: 'accessibility',
+    walkTime: 3,
+    distance: '180m',
+    route: 'via Collins Avenue North',
+    tag: 'Step-Free Access',
+  },
+  {
+    id: 'accessible-lift-helix',
+    name: 'Accessible Lift',
+    subtitle: 'Main Foyer · The Helix (Building Z)',
+    building: 'helix',
+    floor: 'G',
+    code: 'ZG06',
+    category: 'accessibility',
+    walkTime: 4,
+    distance: '200m',
+    route: 'via Main Foyer',
+    tag: 'All Floors',
+  },
+]
+
 // Default suggestions shown on the Search screen
 export const suggestedLocations = [
   locations[0], // Mahony Hall
