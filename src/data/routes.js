@@ -1,111 +1,153 @@
 // Hardcoded route waypoints for The Helix (Building Z)
-// Coordinates are relative to the SVG floor plan viewBox
-// Will be mapped to the IndoorMap SVG during Navigation screen build
+// All SVG coordinates match the HelixFloorPlan viewBox="0 0 390 440"
+// Building layout (top = north/stage end, bottom = Collins Avenue entrance):
+//   y=12–212:  Mahony Hall (left) + Helix Theatre (right)
+//   y=220–272: Main east-west corridor (Helix Staircase at cx=195, cy=246)
+//   y=280–380: Box Office (left) + Main Foyer (centre) + Café Bar (right)
+//   y=384–428: Entrance vestibule (Collins Avenue)
 
 export const helixRoutes = {
-  // Route from Collins Avenue entrance to Mahony Hall
+
   'mahony-hall': {
     locationId: 'mahony-hall',
     startLabel: 'Collins Avenue Entrance',
     endLabel: 'Mahony Hall',
     totalTime: 3,
     totalDistance: '180m',
+    floor: 'Ground Floor',
     steps: [
       { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
-      { instruction: 'Walk straight ahead', detail: 'through the main foyer for 30m', icon: 'straight' },
-      { instruction: 'Pass the Box Office on your left', detail: 'continue along the foyer corridor', icon: 'straight' },
-      { instruction: 'Turn left', detail: 'at the Helix staircase landmark', icon: 'left' },
-      { instruction: 'Mahony Hall is ahead', detail: 'entrance doors on your right', icon: 'arrive' },
+      { instruction: 'Walk straight through the foyer', detail: 'continue ahead for 30m', icon: 'straight' },
+      { instruction: 'Pass the Helix Staircase on your right', detail: 'the signature spiral staircase', icon: 'straight' },
+      { instruction: 'Turn left', detail: 'into the west corridor', icon: 'left' },
+      { instruction: 'Mahony Hall entrance on your right', detail: 'doors marked Mahony Hall', icon: 'arrive' },
     ],
-    // SVG waypoint coordinates — to be set during map build
     waypoints: [
-      { x: 195, y: 680 },
-      { x: 195, y: 560 },
-      { x: 195, y: 460 },
-      { x: 130, y: 460 },
-      { x: 130, y: 340 },
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 195, y: 246 },
+      { x: 100, y: 246 },
+      { x: 100, y: 100 },
     ],
   },
 
-  // Route from Collins Avenue entrance to Helix Theatre
   'helix-theatre': {
     locationId: 'helix-theatre',
     startLabel: 'Collins Avenue Entrance',
     endLabel: 'Helix Theatre',
     totalTime: 4,
     totalDistance: '210m',
+    floor: 'Ground Floor',
     steps: [
       { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
-      { instruction: 'Walk straight ahead', detail: 'through the main foyer for 30m', icon: 'straight' },
-      { instruction: 'Turn right', detail: 'at the foyer junction', icon: 'right' },
-      { instruction: 'Continue along East Corridor', detail: 'for 60m', icon: 'straight' },
-      { instruction: 'Helix Theatre entrance on your left', detail: '', icon: 'arrive' },
+      { instruction: 'Walk straight through the foyer', detail: 'continue ahead for 30m', icon: 'straight' },
+      { instruction: 'Pass the Helix Staircase on your left', detail: 'the signature spiral staircase', icon: 'straight' },
+      { instruction: 'Turn right', detail: 'into the east corridor', icon: 'right' },
+      { instruction: 'Helix Theatre entrance on your left', detail: 'doors marked Helix Theatre', icon: 'arrive' },
     ],
     waypoints: [
-      { x: 195, y: 680 },
-      { x: 195, y: 560 },
-      { x: 195, y: 460 },
-      { x: 260, y: 460 },
-      { x: 260, y: 340 },
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 195, y: 246 },
+      { x: 294, y: 246 },
+      { x: 294, y: 100 },
     ],
   },
 
-  // Route to The Space (Level 1)
   'the-space': {
     locationId: 'the-space',
     startLabel: 'Collins Avenue Entrance',
     endLabel: 'The Space',
     totalTime: 5,
     totalDistance: '240m',
+    floor: 'Level 1',
     steps: [
       { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
-      { instruction: 'Walk straight ahead', detail: 'through the main foyer for 30m', icon: 'straight' },
-      { instruction: 'Take the Helix staircase', detail: 'the signature spiral staircase ahead', icon: 'stairs' },
-      { instruction: 'Continue on Level 1', detail: 'follow signs for The Space', icon: 'straight' },
+      { instruction: 'Walk straight through the foyer', detail: 'continue ahead for 30m', icon: 'straight' },
+      { instruction: 'Take the Helix Staircase up to Level 1', detail: 'the signature spiral staircase ahead', icon: 'stairs' },
+      { instruction: 'Continue along Level 1 corridor', detail: 'follow signs for The Space', icon: 'straight' },
       { instruction: 'The Space entrance on your right', detail: 'Studio Theatre — Level 1', icon: 'arrive' },
     ],
     waypoints: [
-      { x: 195, y: 680 },
-      { x: 195, y: 560 },
-      { x: 195, y: 460 },
-      { x: 195, y: 360 },
-      { x: 195, y: 260 },
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 195, y: 246 },
+      { x: 195, y: 100 },
     ],
   },
 
-  // Route to Helix Café Bar
   'helix-cafe': {
     locationId: 'helix-cafe',
     startLabel: 'Collins Avenue Entrance',
     endLabel: 'Helix Café Bar',
     totalTime: 2,
     totalDistance: '90m',
+    floor: 'Ground Floor',
     steps: [
       { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
-      { instruction: 'Walk straight ahead', detail: 'through the main foyer for 30m', icon: 'straight' },
-      { instruction: 'Helix Café Bar is on your right', detail: 'Ground floor, main foyer area', icon: 'arrive' },
+      { instruction: 'Helix Café Bar is on your right', detail: 'Ground floor, east side of foyer', icon: 'arrive' },
     ],
     waypoints: [
-      { x: 195, y: 680 },
-      { x: 195, y: 560 },
-      { x: 250, y: 520 },
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 334, y: 330 },
     ],
   },
 
-  // Route to Box Office
   'box-office': {
     locationId: 'box-office',
     startLabel: 'Collins Avenue Entrance',
     endLabel: 'Box Office',
     totalTime: 2,
     totalDistance: '80m',
+    floor: 'Ground Floor',
     steps: [
       { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
-      { instruction: 'Box Office is immediately on your left', detail: 'Ground floor, main entrance foyer', icon: 'arrive' },
+      { instruction: 'Box Office is immediately on your left', detail: 'Ground floor, west side of foyer', icon: 'arrive' },
     ],
     waypoints: [
-      { x: 195, y: 680 },
-      { x: 140, y: 600 },
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 56, y: 330 },
+    ],
+  },
+
+  'accessible-entrance-helix': {
+    locationId: 'accessible-entrance-helix',
+    startLabel: 'Collins Avenue Entrance',
+    endLabel: 'Accessible Entrance',
+    totalTime: 3,
+    totalDistance: '180m',
+    floor: 'Ground Floor',
+    steps: [
+      { instruction: 'Enter through the main entrance', detail: 'Step-free access, Collins Avenue North', icon: 'enter' },
+      { instruction: 'Accessible entrance is directly ahead', detail: 'No steps — level access throughout', icon: 'arrive' },
+    ],
+    waypoints: [
+      { x: 195, y: 406 },
+      { x: 195, y: 360 },
+    ],
+  },
+
+  'accessible-lift-helix': {
+    locationId: 'accessible-lift-helix',
+    startLabel: 'Collins Avenue Entrance',
+    endLabel: 'Accessible Lift',
+    totalTime: 4,
+    totalDistance: '200m',
+    floor: 'Ground Floor',
+    steps: [
+      { instruction: 'Enter through the main entrance', detail: 'Collins Avenue, North Entrance', icon: 'enter' },
+      { instruction: 'Walk straight through the foyer', detail: 'continue ahead for 30m', icon: 'straight' },
+      { instruction: 'Accessible lift on your left', detail: 'Serves all floors — Ground, Level 1, Level 2', icon: 'arrive' },
+    ],
+    waypoints: [
+      { x: 195, y: 406 },
+      { x: 195, y: 330 },
+      { x: 130, y: 290 },
     ],
   },
 }
+
+// Fallback route used for non-Helix locations in the demo
+export const defaultDemoRoute = helixRoutes['mahony-hall']
