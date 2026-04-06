@@ -3,7 +3,7 @@ import { helixRoutes, defaultDemoRoute } from '../data/routes'
 import { getPositionAtProgress, getCurrentStepIndex } from '../utils/pathAnimator'
 import IndoorMap from '../components/IndoorMap'
 
-const DEMO_DURATION_MS = 18000 // 18 seconds for full demo route
+const DEMO_DURATION_MS = 10000 // 10 seconds for full demo route
 
 // ─── Direction icons ──────────────────────────────────────────────────────────
 
