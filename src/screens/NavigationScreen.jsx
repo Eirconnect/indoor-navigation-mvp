@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { helixRoutes, defaultDemoRoute } from '../data/routes'
 import { getPositionAtProgress, getCurrentStepIndex } from '../utils/pathAnimator'
 import IndoorMap from '../components/IndoorMap'
@@ -58,32 +58,27 @@ const directionBg = {
 
 export default function NavigationScreen({ location, onArrive }) {
   const [progress, setProgress] = useState(0)
-  const rafRef = useRef(null)
-  const startTimeRef = useRef(null)
 
   const route = helixRoutes[location?.id] ?? defaultDemoRoute
   const { waypoints, steps, totalTime } = route
 
-  // Animate progress from 0 → 1 over DEMO_DURATION_MS
+  // setInterval is more reliable than rAF for progress tracking on mobile Safari
   useEffect(() => {
-    startTimeRef.current = performance.now()
+    const TICK_MS = 80
+    const totalTicks = DEMO_DURATION_MS / TICK_MS
+    let tick = 0
 
-    const tick = (now) => {
-      const elapsed = now - startTimeRef.current
-      const p = Math.min(elapsed / DEMO_DURATION_MS, 1)
+    const interval = setInterval(() => {
+      tick++
+      const p = Math.min(tick / totalTicks, 1)
       setProgress(p)
-
-      if (p < 1) {
-        rafRef.current = requestAnimationFrame(tick)
-      } else {
+      if (p >= 1) {
+        clearInterval(interval)
         setTimeout(onArrive, 1200)
       }
-    }
+    }, TICK_MS)
 
-    rafRef.current = requestAnimationFrame(tick)
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
+    return () => clearInterval(interval)
   }, [])
 
   const userPosition = getPositionAtProgress(waypoints, progress)
@@ -157,7 +152,7 @@ export default function NavigationScreen({ location, onArrive }) {
 
         {/* Progress bar */}
         <div style={styles.progressTrack}>
-          <div style={{ ...styles.progressFill, width: `${progress * 100}%` }} />
+          <div style={{ ...styles.progressFill, transform: `scaleX(${progress})` }} />
         </div>
         <div style={styles.progressLabels}>
           <span style={styles.progressLabelStart}>START</span>
@@ -294,9 +289,12 @@ const styles = {
   },
   progressFill: {
     height: '100%',
+    width: '100%',
     background: '#2563EB',
     borderRadius: 3,
-    transition: 'width 0.1s linear',
+    transformOrigin: 'left',
+    transform: 'scaleX(0)',
+    transition: 'transform 0.1s linear',
   },
   progressLabels: {
     display: 'flex',
