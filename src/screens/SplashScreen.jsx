@@ -16,7 +16,7 @@ export default function SplashScreen() {
         </div>
 
         <h1 style={styles.title}>Wayfinder</h1>
-        <p style={styles.subtitle}>DCU Campus Navigation</p>
+        <p style={styles.subtitle}>Navigate any building, indoors or out</p>
       </div>
 
       <p style={styles.footer}>Powered by Eirconnect</p>

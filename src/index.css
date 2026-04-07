@@ -80,11 +80,13 @@ body {
   body {
     background: #ffffff;
     align-items: flex-start;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .phone-shell {
     width: 100vw;
-    height: 100dvh;
+    height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     border-radius: 0;
     box-shadow: none;
   }
